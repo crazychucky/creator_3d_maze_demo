@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component, PhysicsSystem } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameController')
@@ -12,7 +12,12 @@ export class GameController extends Component {
     // serializableDummy = 0;
 
     start () {
+      // debug
+      // PhysicsSystem.instance.debug = EPhysics2DDrawFlags.Aabb
         // [3]
+    }
+
+    onSuccess () {
     }
 
     // update (deltaTime: number) {
