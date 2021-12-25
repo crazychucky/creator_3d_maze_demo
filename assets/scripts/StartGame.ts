@@ -1,41 +1,43 @@
 
-import { _decorator, Component,Collider,ITriggerEvent, Node } from 'cc';
-import { GameController } from "./GameController"
+import { _decorator, Component,CCBoolean,director, Node } from 'cc';
 const { ccclass, property } = _decorator;
 
 /**
  * Predefined variables
- * Name = GoalTrigger
- * DateTime = Wed Dec 22 2021 17:54:57 GMT+0800 (中国标准时间)
+ * Name = StartGame
+ * DateTime = Sat Dec 25 2021 22:09:33 GMT+0800 (香港标准时间)
  * Author = crazychucky
- * FileBasename = GoalTrigger.ts
- * FileBasenameNoExtension = GoalTrigger
- * URL = db://assets/scripts/GoalTrigger.ts
+ * FileBasename = StartGame.ts
+ * FileBasenameNoExtension = StartGame
+ * URL = db://assets/scripts/StartGame.ts
  * ManualUrl = https://docs.cocos.com/creator/3.3/manual/zh/
  *
  */
+
+let GAME_SCENE = "game_scene"
  
-@ccclass('GoalTrigger')
-export class GoalTrigger extends Component {
+@ccclass('StartGame')
+export class StartGame extends Component {
     // [1]
     // dummy = '';
 
     // [2]
     // @property
     // serializableDummy = 0;
-
-    @property({type:GameController})
-    private gameController = null
+    @property({ type: CCBoolean })
+    private _inLoad:Boolean = false
 
     start () {
-      let com = this.getComponent(Collider)
-      com.on('onTriggerEnter', this.onTrigger, this)
-      // [3]
+      this._inLoad = false
+        // [3]
     }
 
-    private onTrigger (event: ITriggerEvent) {
-      this.gameController.onSuccess()
-      // TODO:call game success
+    onStartGame () {
+        if(this._inLoad){
+            return
+        }
+        this._inLoad = true
+        director.loadScene(GAME_SCENE)
     }
     // update (deltaTime: number) {
     //     // [4]

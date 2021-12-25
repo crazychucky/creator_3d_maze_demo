@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Vec3, systemEvent, SystemEvent,EventKeyboard, RigidBody } from 'cc';
+import { _decorator, Component, Vec3, systemEvent, SystemEvent,EventKeyboard, RigidBody,CCBoolean } from 'cc';
 import { KeyCode } from 'cc';
 const { ccclass, property } = _decorator;
 
@@ -22,7 +22,7 @@ export class PlayerController extends Component {
     // @property
     // serializableDummy = 0;
 
-    @property({ type: Array(Boolean) })
+    @property({ type: Array(CCBoolean) })
     private _dirFlags = []
 
     @property({ type: RigidBody })

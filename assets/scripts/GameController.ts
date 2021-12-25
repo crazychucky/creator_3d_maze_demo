@@ -1,7 +1,8 @@
 
-import { _decorator, Component, PhysicsSystem } from 'cc';
+import { _decorator, Component, CCBoolean, director } from 'cc';
 const { ccclass, property } = _decorator;
 
+let PASS_SCENE = "ending_scene"
 @ccclass('GameController')
 export class GameController extends Component {
     // [1]
@@ -10,14 +11,23 @@ export class GameController extends Component {
     // [2]
     // @property
     // serializableDummy = 0;
+    @property({ type: CCBoolean })
+    private _inLoad:Boolean = false
+
 
     start () {
+      this._inLoad = false
       // debug
       // PhysicsSystem.instance.debug = EPhysics2DDrawFlags.Aabb
         // [3]
     }
 
     onSuccess () {
+        if(this._inLoad){
+            return
+        }
+        this._inLoad = true
+        director.loadScene(PASS_SCENE)
     }
 
     // update (deltaTime: number) {
